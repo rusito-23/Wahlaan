@@ -1,7 +1,7 @@
 # Wahlaan Tests 🤓
 Tests para el proyecto de Matemática Discreta II 2019, en Famaf, Argentina.
 
-## Suites 🙈
+## Suites 🙈
 El proyecto cuenta con 4 suites de test, cada uno de los cuales toma un único grafo:
 
 - **SANITY**
@@ -32,7 +32,7 @@ El proyecto cuenta con 4 suites de test, cada uno de los cuales toma un único g
 	Muestra los resultados de correr Greedy y Bipartito sobre el grafo.
 	
 	
-## Makefile 🔛
+## Makefile 🔛
 El makefile permite al usuario llamar a los disintos suites con distintas configuraciones y grafos.
 Los target son los siguientes:
 
