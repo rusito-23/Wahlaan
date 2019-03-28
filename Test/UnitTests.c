@@ -183,3 +183,34 @@ TestOrdenRMBchicogrande(Grafo G)
     free(compartidos);
     compartidos = NULL;
 }
+
+
+void
+TestCopiaDeGrafo(Grafo G)
+{
+    printTitle("TestCopiaDeGrafo");
+
+    Grafo copia = CopiarGrafo(G);
+
+    // datos generales del grafo
+    assert(NumeroDeVertices(copia) == NumeroDeVertices(G));
+    assert(NumeroDeLados(copia) == NumeroDeLados(G));
+    assert(NumeroDeColores(copia) == NumeroDeColores(G));
+
+    // chequeamos que se haya preservado el orden
+    qfor(i, NumeroDeVertices(G)) {
+
+        // validamos datos del mismo vértice
+        assert(NombreDelVertice(G, i) == NombreDelVertice(copia, i));
+        assert(ColorDelVertice(G, i) == ColorDelVertice(copia, i));
+        assert(GradoDelVertice(G, i) == GradoDelVertice(copia, i));
+
+        // vamos validando datos de los vecinos
+        qfor(j, GradoDelVertice(G, i)) {
+            assert(ColorJotaesimoVecino(G, i, j) == ColorJotaesimoVecino(copia, i, j));
+            assert(NombreJotaesimoVecino(G, i, j) == NombreJotaesimoVecino(copia, i, j));
+        }
+    }
+
+    DestruccionDelGrafo(copia);
+}

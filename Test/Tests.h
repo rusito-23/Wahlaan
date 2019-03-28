@@ -92,6 +92,6 @@ void TestOrdenRMBCInverso(Grafo G);
 
 void TestOrdenRMBchicogrande(Grafo G);
 
-
+void TestCopiaDeGrafo(Grafo G);
 
 #endif //LUCEROANDRUSKIEWITSCH_TESTS_H

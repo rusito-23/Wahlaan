@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <string.h>
 #include "../Wahlaan/Rii.h"
+#include "Tests.h"
 
 // MARK: -- randint auxiliar
 
@@ -76,27 +77,12 @@ TestMultipleSwitchVertices(Grafo G, u32 cantidad)
 void
 TestMultipleRMBC(Grafo G, u32 cantidad)
 {
+    char (*rmbcs[3])(Grafo) = {RMBCnormal, RMBCrevierte, RMBCchicogrande};
 
     // repetimos la cantidad de veces pedida
     qfor(i, cantidad) {
-
         // para cada uno, elegimos un RMBC distinto
-        u32 rand = randint(3);
-        switch (rand) {
-            case 0:
-                RMBCnormal(G);
-                break;
-            case 1:
-                RMBCrevierte(G);
-                break;
-            case 2:
-                RMBCchicogrande(G);
-                break;
-            default:
-                RMBCnormal(G);
-                break;
-        }
-
+        rmbcs[i%3](G);
         // corremos greedy de nuevo para buscar otro coloreo
         Greedy(G);
     }
