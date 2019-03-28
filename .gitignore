@@ -1,0 +1,9 @@
+
+
+.idea
+/cmake-build-release
+/cmake-build-debug
+/Graphs
+.DS_Store
+Ejecutable
+*.dSYM
