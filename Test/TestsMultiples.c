@@ -31,17 +31,19 @@ randint(u32 N)
 void
 TestMultipleSwitchVertices(Grafo G, u32 cantidad)
 {
-    if (G->N < cantidad) {
+    u32 N = NumeroDeVertices(G);
+
+    if (N < cantidad) {
         printf("TestMultipleSwitchVertices: El grafo no tiene suficientes vértices \n");
         exit(1);
     }
 
     // inicializamos matriz auxiliar
-    bool **used = calloc(G->N, sizeof(bool*));
-    qfor(i, G->N) { used[i] = calloc(G->N, sizeof(bool)); }
+    bool **used = calloc(N, sizeof(bool*));
+    qfor(i, N) { used[i] = calloc(N, sizeof(bool)); }
 
-    u32 v1 = randint(G->N);
-    u32 v2 = randint(G->N);
+    u32 v1 = randint(N);
+    u32 v2 = randint(N);
 
     // repetimos la cantidad veces pedida
     qfor(o, cantidad) {
@@ -49,8 +51,8 @@ TestMultipleSwitchVertices(Grafo G, u32 cantidad)
         // aseguramos que los vertices que switchemos
         // no fueron switcheados
         while (used[v1][v2] || used[v2][v1]) {
-            v1 = randint(G->N);
-            v2 = randint(G->N);
+            v1 = randint(N);
+            v2 = randint(N);
         }
 
         // switcheamos
@@ -61,12 +63,12 @@ TestMultipleSwitchVertices(Grafo G, u32 cantidad)
         used[v2][v1] = true;
 
         // buscamos nuevos
-        v1 = randint(G->N);
-        v2 = randint(G->N);
+        v1 = randint(N);
+        v2 = randint(N);
     }
 
     // liberamos matrix auxiliar
-    qfor(i, G->N) { free(used[i]); }
+    qfor(i, N) { free(used[i]); }
     free(used);
     used = NULL;
 }
@@ -106,9 +108,10 @@ TestMultipleRMBC(Grafo G, u32 cantidad)
 void
 TestMultipleSwitchVerticesRepeticion(Grafo G, u32 cantidad)
 {
+    u32 N = NumeroDeVertices(G);
     qfor(i, cantidad) {
-        u32 v1 = randint(G->N);
-        u32 v2 = randint(G->N);
+        u32 v1 = randint(N);
+        u32 v2 = randint(N);
         SwitchVertices(G, v1, v2);
     }
 }
