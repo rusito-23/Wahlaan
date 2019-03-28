@@ -18,7 +18,7 @@ TestGreedy(Grafo G)
 
     // validamos que el coloreo sea propio
     qfor(i, N) {
-        qfor(j, OrdenDelVertice(G, i)) {
+        qfor(j, GradoDelVertice(G, i)) {
             assert(ColorDelVertice(G, i) != ColorJotaesimoVecino(G, i, j));
         }
     }

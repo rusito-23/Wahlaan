@@ -32,7 +32,7 @@ printGrafo(Grafo g)
 {
     if (g != NULL) {
 
-        u32 N = NumeroDeVertices(G);
+        u32 N = NumeroDeVertices(g);
 
         printf("GRAFO -> N: %d, M:%d, C: %d \n",
                 NumeroDeVertices(g),
@@ -40,7 +40,7 @@ printGrafo(Grafo g)
                 NumeroDeColores(g));
 
         // no imprimir los vertices si son demasiados
-        if (NumeroDeVertices(g) > 10) { return; }
+        if (N > 10) { return; }
 
         qfor(i, N) {
             printf("nombre: %d, color: %d, grado: %d, vecinos: [",
