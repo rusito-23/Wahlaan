@@ -106,6 +106,8 @@ PerformanceSuite()
 {
     printTitle("PERFORMANCE SUITE");
 
+    TICK(TOTAL);
+
     // Toma del grafo
     TICK(TOMA_DE_GRAFO);
     Grafo G = ConstruccionDelGrafo();
@@ -119,24 +121,31 @@ PerformanceSuite()
     TICK(CORRIDAS);
 
     // greedy con orden natural
+    TICK(GREEDY);
     Greedy(G);
-    PARTIAL_TOCK(CORRIDAS, "Greedy");
+    PARTIAL_TOCK(GREEDY, "Greedy");
 
     // greedy con welsh powell
+    TICK(GREEDY_WP);
     OrdenWelshPowell(G);
     Greedy(G);
-    PARTIAL_TOCK(CORRIDAS, "WelshPowell con Greedy");
+    PARTIAL_TOCK(GREEDY_WP, "WelshPowell con Greedy");
 
     // 100 switch vertices
+    TICK(SWV);
     TestMultipleSwitchVerticesRepeticion(G, 100);
-    PARTIAL_TOCK(CORRIDAS, "100 SwitchVertices");
+    PARTIAL_TOCK(SWV, "100 SwitchVertices");
 
     // 1000 RMBC
+    TICK(RMBC);
     TestMultipleRMBC(G, 1000);
-    PARTIAL_TOCK(CORRIDAS, "1000 RMBCs");
+    PARTIAL_TOCK(RMBC, "1000 RMBCs");
 
     // Fin testeo de corridas
     TOCK(CORRIDAS);
+
+    // Fin de todos los testeos
+    TOCK(TOTAL);
 
     // destrucction
     DestruccionDelGrafo(G);

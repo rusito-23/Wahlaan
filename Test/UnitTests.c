@@ -16,8 +16,12 @@ TestGreedy(Grafo G)
     u32 colors = Greedy(G);
     printf("Resultado Greedy -> %d \n", colors);
 
+    assert(NumeroDeColores(G) != 0);
+    assert(NumeroDeColores(G) <= NumeroDeVertices(G));
+
     // validamos que el coloreo sea propio
     qfor(i, N) {
+        assert(ColorDelVertice(G, i) != NO_COLOR);
         qfor(j, GradoDelVertice(G, i)) {
             assert(ColorDelVertice(G, i) != ColorJotaesimoVecino(G, i, j));
         }
@@ -33,8 +37,15 @@ TestBipartito(Grafo G)
     int bipartito = Bipartito(G);
     printf("Resultado bipartito -> %d \n", bipartito);
 
+    if (bipartito) {
+        qfor(i, N) {
+            assert(ColorDelVertice(G, i) == 0 || ColorDelVertice(G, i) == 1);
+        }
+    }
+
     // validamos que el coloreo sea propio
     qfor(i, N) {
+        assert(ColorDelVertice(G, i) != NO_COLOR);
         qfor(j, GradoDelVertice(G, i)) {
             assert(ColorDelVertice(G, i) != ColorJotaesimoVecino(G, i, j));
         }
@@ -103,10 +114,10 @@ TestSwitchColores(Grafo G)
     u32 C = NumeroDeColores(G);
     // generar dos colores random
     printSection("Test Case Exitoso");
-    u32 c1 = randint(C) + 1;
-    u32 c2 = randint(C) + 1;
+    u32 c1 = randint(C);
+    u32 c2 = randint(C);
     char res = SwitchColores(G, c1, c2);
-    assert (res == 0);
+    assert(res == 0);
 
     // asignar un número que debe generar error
     printSection("Test Case Error");
@@ -169,15 +180,14 @@ TestOrdenRMBchicogrande(Grafo G)
     // contamos cantidad de vertices que comparte cada color
     qfor(i, N) {
         u32 color = ColorDelVertice(G, i);
-        compartidos[--color]++;
+        compartidos[color] += 1;
     }
 
     // chequeamos que los vertices tengan el orden que deberían tener
     qfor(i, (N - 1)) {
         u32 color = ColorDelVertice(G, i);
         u32 next_color = ColorDelVertice(G, i+1);
-
-        assert(compartidos[color - 1] <= compartidos[next_color - 1]);
+        assert(compartidos[color] <= compartidos[next_color]);
     }
 
     free(compartidos);

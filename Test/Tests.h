@@ -6,11 +6,15 @@
 
 // PERFORMANCE CONTROL
 #define roundz(x,d) ((floor(((x)*pow(10,d))+.5))/pow(10,d))
+#define SECONDS(X) roundz((((double) clock() - (X)) / CLOCKS_PER_SEC), 2)
+#define MINUTES(X) roundz(SECONDS(X) / (double) 60.0, 2)
 #define TICK(X) clock_t X = clock()
-#define TOCK(X) printf("FIN: Tiempo de ejecución de %s: %g min.\n\n", (#X), \
-                      roundz((((double) clock() - (X)) / CLOCKS_PER_SEC) / (double) 60.0, 2))
-#define PARTIAL_TOCK(X, SECTION) printf("PARTIAL: Tiempo de ejecución de %s: %g min.\n\n", SECTION, \
-                                roundz((((double) clock() - (X)) / CLOCKS_PER_SEC) / (double) 60.0, 2))
+#define TOCK(X) printf("FIN: Tiempo de ejecución de %s: %g %s.\n\n", (#X), \
+                        MINUTES(X) < 1 ? SECONDS(X): MINUTES(X), \
+                        MINUTES(X) < 1 ? "sec" : "min")
+#define PARTIAL_TOCK(X, SECTION) printf("PARTIAL: Tiempo de ejecución de %s: %g %s.\n\n", SECTION, \
+                        MINUTES(X) < 1 ? SECONDS(X): MINUTES(X), \
+                        MINUTES(X) < 1 ? "sec" : "min")
 
 // MARK: -- SUITES
 

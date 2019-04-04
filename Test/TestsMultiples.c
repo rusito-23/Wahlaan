@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <zconf.h>
+#include <time.h>
 #include "../Wahlaan/Rii.h"
 #include "Tests.h"
 
@@ -77,16 +79,27 @@ TestMultipleSwitchVertices(Grafo G, u32 cantidad)
 void
 TestMultipleRMBC(Grafo G, u32 cantidad)
 {
+    bool print = cantidad > 300; // solo vamos a hacer print si son muchas vueltas
     char (*rmbcs[3])(Grafo) = {RMBCnormal, RMBCrevierte, RMBCchicogrande};
+    char *str = malloc(15*sizeof(char));
+
+    TICK(VUELTA);
+    if (print) printf("INIT: TestMultipleRMBC : %d vueltas : \n\n", cantidad);
 
     // repetimos la cantidad de veces pedida
     qfor(i, cantidad) {
         // para cada uno, elegimos un RMBC distinto
         rmbcs[i%3](G);
+        // resultados parciales por 100 vueltas
+        if (!(i%100) && (i != 0) && print) {
+            sprintf(str, "vuelta %d", i);
+            PARTIAL_TOCK(VUELTA, str);
+        }
         // corremos greedy de nuevo para buscar otro coloreo
         Greedy(G);
     }
 
+    free(str);
 }
 
 // MARK: -- TESTS DE MULTIPLE EJECUCION PARA PERFORMANCE
