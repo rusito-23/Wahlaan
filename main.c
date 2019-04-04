@@ -10,7 +10,7 @@ printHelp()
     printf("Incorrect arguments. \n"
            "Usage:\n"
            "    --suite <<SUITE>> (required)\n"
-           "             options: SANITY, PERFORMANCE, COLOR, BIPARTITO\n\n"
+           "             options: SANITY, PERFORMANCE, COLOR, BIPARTITO, CUSTOM\n\n"
            "    --file <<FILENAME>> (optional)\n");
 }
 
@@ -31,6 +31,9 @@ testGrafo(enum Suite suite) {
             break;
         case BIPARTITO:
             BipartitoSuite();
+            break;
+        case CUSTOM:
+            CustomSuite();
             break;
         case NONE:
             printHelp();

@@ -105,7 +105,9 @@ TestMultipleRMBC(Grafo G, u32 cantidad)
         u32 new_greedy = Greedy(G);
 
         // RMBC nunca debe bajar el coloreo!
-        assert(last_greedy >= new_greedy);
+        if (last_greedy < new_greedy) {
+            printf("ERROR: RMBC: coloreo anterior: %d -- coloreo actual %d \n", last_greedy, new_greedy);
+        }
         last_greedy = new_greedy;
     }
 

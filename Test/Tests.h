@@ -23,6 +23,7 @@ enum Suite {
     PERFORMANCE,
     COLOR,
     BIPARTITO,
+    CUSTOM,
     NONE
 };
 
@@ -35,6 +36,8 @@ void ColorSuite();
 void PerformanceSuite();
 
 void BipartitoSuite();
+
+void CustomSuite();
 
 // MARK: -- HELPERS
 

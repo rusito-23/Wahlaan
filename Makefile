@@ -70,9 +70,12 @@ sanity-all: --folder all
 performance-all: --folder all
 	@$(FOR_F_RUN) PERFORMANCE $(ENDFOR)
 
+custom-all: --folder all
+	@$(FOR_F_RUN) CUSTOM $(ENDFOR)
+
 
 # INDIVIDUAL SUITES
-sanity color performance bipartito: VALGRIND =
+sanity color performance bipartito custom: VALGRIND =
 
 sanity: --graph all
 	$(EXEC) SANITY $(END_EXEC)
@@ -87,6 +90,9 @@ performance: --graph all
 
 bipartito: --graph all
 	$(EXEC) BIPARTITO $(END_EXEC)
+
+custom: --graph all
+	$(EXEC) CUSTOM $(END_EXEC)
 
 # VALGRIND SUITES
 
@@ -103,3 +109,7 @@ performance-valgrind: --graph all
 
 bipartito-valgrind: --graph all
 	$(EXEC) BIPARTITO $(END_EXEC)
+
+custom-valgrind: --graph all
+	$(EXEC) CUSTOM $(END_EXEC)
+

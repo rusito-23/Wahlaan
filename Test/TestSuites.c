@@ -17,6 +17,8 @@ SuiteFromString(char * str)
         return COLOR;
     } else if (strcmp(str, "BIPARTITO") == 0) {
         return BIPARTITO;
+    } else if (strcmp(str, "CUSTOM") == 0) {
+        return CUSTOM;
     } else {
         return NONE;
     }
@@ -179,4 +181,57 @@ BipartitoSuite()
 
     // destrucction
     DestruccionDelGrafo(G);
+}
+
+
+void
+CustomSuite()
+{
+    u32 colors;
+    printTitle("CUSTOM SUITE");
+
+    // toma de grafo
+    Grafo G = ConstruccionDelGrafo();
+    if (G == NULL) {
+        printf("Ocurrió un error al tomar el grafo! \n");
+        _exit(1);
+    }
+
+    // natural
+    OrdenNatural(G);
+    colors = Greedy(G);
+    printf("Greedy con orden natural: %d \n\n", colors);
+
+    // welsh powell
+    OrdenWelshPowell(G);
+    colors = Greedy(G);
+    printf("Greedy con orden WelshPowell: %d \n\n", colors);
+
+    // 100 switch vertices
+    TestMultipleSwitchVertices(G, 100);
+    colors = Greedy(G);
+    printf("Greedy con 100 SwitchVertices: %d \n\n", colors);
+
+    u32 cantidad = 100;
+    void (*rmbcs[3])(Grafo) = {TestOrdenRMBCNormal, TestOrdenRMBCInverso, TestOrdenRMBchicogrande};
+
+    // seteamos el greedy como valor máximo
+    u32 last_greedy = 0b11111111111111111111111111111111;
+
+    // repetimos la cantidad de veces pedida
+    qfor(i, cantidad) {
+
+        // para cada uno, elegimos un RMBC distinto
+        rmbcs[i%3](G);
+
+        // corremos greedy de nuevo para buscar otro coloreo
+        u32 new_greedy = Greedy(G);
+
+        // RMBC nunca debe bajar el coloreo!
+        if (last_greedy < new_greedy) {
+            printf("ERROR: RMBC: coloreo anterior: %d -- coloreo actual %d \n", last_greedy, new_greedy);
+        }
+        last_greedy = new_greedy;
+    }
+
 }
