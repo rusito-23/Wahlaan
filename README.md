@@ -48,6 +48,14 @@ Los target son los siguientes:
 	
 	`make bipartito-valgrind GRAPH=Graphs/Bipartito.txt VALGRIND='valgrind --leak-check=full --show-leak-kinds=all'`
 	
+## Ejecutable 💥
+Al correr el comando `make`, se genera un archivo *Ejecutable*, este archivo se puede correr independientemente del make con los siguientes parámetros:
+
+- --suite <SUITE(MAY)>
+- --file <PATH/AL/ARCHIVO>
+
+Este segundo parámetro nos sirve para poder debuggear nuestro código desde un IDE que no soporten la redirección del stdin con `<`.
+	
 ## Instalación y seteo de la estructura 🔧
 Para setear los test, lo único que se debe hacer es agregar la carpeta Wahlaan con la especificación requerida por el profe en la carpeta donde se encuentra el Makefile.
 
