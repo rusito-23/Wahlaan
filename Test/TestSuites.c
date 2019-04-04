@@ -73,6 +73,8 @@ SanitySuite()
         _exit(1);
     }
 
+    printGrafo(G);
+
     TestCopiaDeGrafo(G);
 
     TestGreedy(G);

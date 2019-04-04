@@ -1,6 +1,6 @@
 # COMPILER OPTS
 CC = gcc
-CFLAGS = -IWahlaan -Wall -Wextra -O3 -std=c99
+CFLAGS = -IWahlaan -Wall -Werror -Wextra -O3 -std=c99
 RM = rm -rf
 VALGRIND_2 = valgrind --leak-check=full --show-leak-kinds=all
 VALGRIND = valgrind --tool=memcheck

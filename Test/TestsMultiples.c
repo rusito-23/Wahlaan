@@ -86,17 +86,27 @@ TestMultipleRMBC(Grafo G, u32 cantidad)
     TICK(VUELTA);
     if (print) printf("INIT: TestMultipleRMBC : %d vueltas : \n\n", cantidad);
 
+    // seteamos el greedy como valor máximo
+    u32 last_greedy = 0b11111111111111111111111111111111;
+
     // repetimos la cantidad de veces pedida
     qfor(i, cantidad) {
+
         // para cada uno, elegimos un RMBC distinto
         rmbcs[i%3](G);
+
         // resultados parciales por 100 vueltas
         if (!(i%100) && (i != 0) && print) {
             sprintf(str, "vuelta %d", i);
             PARTIAL_TOCK(VUELTA, str);
         }
+
         // corremos greedy de nuevo para buscar otro coloreo
-        Greedy(G);
+        u32 new_greedy = Greedy(G);
+
+        // RMBC nunca debe bajar el coloreo!
+        assert(last_greedy >= new_greedy);
+        last_greedy = new_greedy;
     }
 
     free(str);
