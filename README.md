@@ -51,7 +51,8 @@ Los target son los siguientes:
 ## Instalación y seteo de la estructura 🔧
 Para setear los test, lo único que se debe hacer es agregar la carpeta Wahlaan con la especificación requerida por el profe en la carpeta donde se encuentra el Makefile.
 
-La estructura que debería quedar es:
+### ATENCIÓN
+NO es necesario que la carpeta de Graphs tenga exactamente la misma estructura, ya que el nombre de la carpeta para correr tests en múltiples grafos se toma por el Makefile, esta es simplemente la estructura recomendada:
 
 ```
 .
@@ -62,7 +63,7 @@ La estructura que debería quedar es:
 │   │   └── Grafos chicos para probar suite COLOR
 │   ├── Completes
 │   │   └── Grafo Completos
-│   └── Test
+│   └── Performance
 │       └── Grafos para probar performance
 ├── Makefile
 ├── README.md
@@ -77,8 +78,5 @@ La estructura que debería quedar es:
 │   └── Rii.h
 └── main.c
 ```
-
-
-
 
 
