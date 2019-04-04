@@ -172,7 +172,7 @@ BipartitoSuite()
     printf("Greedy con orden natural: %d \n\n", colors);
 
     // bipartito
-    int bipartito = Bipartito(G);
+    int bipartito = TestBipartito(G);
     bipartito == 1 ? printf("El grafo es bipartito \n\n") : printf("El grafo NO ES BIPARTITO \n\n");
 
     // destrucction

@@ -5,30 +5,19 @@
 #include "Tests.h"
 #include "../Wahlaan/Rii.h"
 
-// COLOREO
+// MARK: -- COLOREO
 
 void
 TestGreedy(Grafo G)
 {
-    u32 N = NumeroDeVertices(G);
-
     printTitle("TestGreedy");
     u32 colors = Greedy(G);
     printf("Resultado Greedy -> %d \n", colors);
 
-    assert(NumeroDeColores(G) != 0);
-    assert(NumeroDeColores(G) <= NumeroDeVertices(G));
-
-    // validamos que el coloreo sea propio
-    qfor(i, N) {
-        assert(ColorDelVertice(G, i) != NO_COLOR);
-        qfor(j, GradoDelVertice(G, i)) {
-            assert(ColorDelVertice(G, i) != ColorJotaesimoVecino(G, i, j));
-        }
-    }
+    ValidarColoreo(G);
 }
 
-void
+int
 TestBipartito(Grafo G)
 {
     printTitle("TestBipartito");
@@ -38,21 +27,23 @@ TestBipartito(Grafo G)
     printf("Resultado bipartito -> %d \n", bipartito);
 
     if (bipartito) {
+        // validamos cantidad de colores
+        assert(G->C == 2);
+
+        // si es bipartito, los colores deben ser sí o sí 0/1
         qfor(i, N) {
             assert(ColorDelVertice(G, i) == 0 || ColorDelVertice(G, i) == 1);
         }
+    } else {
+        // caso contrario, debe tener más de 2 colores
+        assert(G->C > 2);
     }
 
-    // validamos que el coloreo sea propio
-    qfor(i, N) {
-        assert(ColorDelVertice(G, i) != NO_COLOR);
-        qfor(j, GradoDelVertice(G, i)) {
-            assert(ColorDelVertice(G, i) != ColorJotaesimoVecino(G, i, j));
-        }
-    }
+    ValidarColoreo(G);
+    return bipartito;
 }
 
-// ORDEN
+// MARK: -- ORDEN
 
 void
 TestOrdenNatural(Grafo G)
@@ -65,6 +56,8 @@ TestOrdenNatural(Grafo G)
     qfor(i, N - 1) {
         assert(NombreDelVertice(G, i) < NombreDelVertice(G, i+1));
     }
+
+    ValidarColoreo(G);
 }
 
 
@@ -79,6 +72,8 @@ TestOrdenWelshPowell(Grafo G)
     qfor(i, N - 1) {
         assert(GradoDelVertice(G, i) >= GradoDelVertice(G, i+1));
     }
+
+    ValidarColoreo(G);
 }
 
 void
@@ -103,6 +98,7 @@ TestSwitchVertices(Grafo G)
         assert(NombreDelVertice(G, v2) == name_1);
     }
 
+    ValidarColoreo(G);
 }
 
 
@@ -124,6 +120,8 @@ TestSwitchColores(Grafo G)
     c1 = C + 1;
     res = SwitchColores(G, c1, c2);
     assert(res == 1);
+
+    ValidarColoreo(G);
 }
 
 void
@@ -142,6 +140,7 @@ TestOrdenRMBCNormal(Grafo G)
         assert(color <= next_color);
     }
 
+    ValidarColoreo(G);
 }
 
 void
@@ -160,6 +159,7 @@ TestOrdenRMBCInverso(Grafo G)
         assert(color >= next_color);
     }
 
+    ValidarColoreo(G);
 }
 
 void
@@ -192,6 +192,8 @@ TestOrdenRMBchicogrande(Grafo G)
 
     free(compartidos);
     compartidos = NULL;
+
+    ValidarColoreo(G);
 }
 
 
@@ -222,5 +224,30 @@ TestCopiaDeGrafo(Grafo G)
         }
     }
 
+    ValidarColoreo(G);
     DestruccionDelGrafo(copia);
+}
+
+
+
+
+// MARK: -- Funciones de testeo
+
+void
+ValidarColoreo(Grafo G)
+{
+    u32 N = NumeroDeVertices(G);
+
+    // validamos datos obvios del coloreo
+    assert(NumeroDeColores(G) != 0);
+    assert(NumeroDeColores(G) <= NumeroDeVertices(G));
+
+    // validamos que el coloreo sea propio
+    qfor(i, N) {
+        assert(ColorDelVertice(G, i) != NO_COLOR);
+        qfor(j, GradoDelVertice(G, i)) {
+            assert(ColorDelVertice(G, i) != ColorJotaesimoVecino(G, i, j));
+        }
+    }
+
 }

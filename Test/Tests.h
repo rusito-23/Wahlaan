@@ -52,13 +52,13 @@ void printGrafo(Grafo grafo);
 
 // MARK: -- TEST DE UNIDAD
 
-// COLOREO
+// MARK: -- COLOREO
 
 void TestGreedy(Grafo G);
 
-void TestBipartito(Grafo G);
+int TestBipartito(Grafo G);
 
-// MULTIPLES
+// MARK: -- MULTIPLES
 
 void TestMultipleSwitchVertices(Grafo G, u32 cantidad);
 // Switchea vertices la cantidad de veces indicada, sin repetición de vértices
@@ -78,7 +78,7 @@ void TestMultipleRMBChicoGrande(Grafo G, u32 cantidad);
 // usamos esta para performance ya que es la más costosa de los RMBC
 // y nos ahorramos el cálculo del randint
 
-// ORDEN
+// MARK: -- ORDEN
 
 void TestOrdenNatural(Grafo G);
 
@@ -97,5 +97,9 @@ void TestOrdenRMBCInverso(Grafo G);
 void TestOrdenRMBchicogrande(Grafo G);
 
 void TestCopiaDeGrafo(Grafo G);
+
+// MARK: -- Funciones de testeo
+
+void ValidarColoreo(Grafo G);
 
 #endif //LUCEROANDRUSKIEWITSCH_TESTS_H
