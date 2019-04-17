@@ -54,10 +54,10 @@ main(int argv, char** argc)
 
     // tomamos el argumento file (opcional)
     // y pasamos su contenido como stdin
-    if (argv >= 5 && strcmp(argc[3], "--file") == 0) {
-        char * file_name = argc[4];
-        freopen(file_name, "r", stdin);
-    }
+    //if (argv >= 5 && strcmp(argc[3], "--file") == 0) {
+    //    char * file_name = argc[4];
+    //    freopen(file_name, "r", stdin);
+    //}
 
     // tomamos la suite y testeamos
     enum Suite suite = SuiteFromString(argc[2]);
