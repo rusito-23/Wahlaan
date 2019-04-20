@@ -4,6 +4,11 @@
 #ifndef LUCEROANDRUSKIEWITSCH_TESTS_H
 #define LUCEROANDRUSKIEWITSCH_TESTS_H
 
+// MACROS
+#ifndef qfor
+#define qfor(i,n) for(u32 i=0; i<n; ++i)
+#endif
+
 // PERFORMANCE CONTROL
 #define roundz(x,d) ((floor(((x)*pow(10,d))+.5))/pow(10,d))
 #define SECONDS(X) roundz((((double) clock() - (X)) / CLOCKS_PER_SEC), 2)

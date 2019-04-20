@@ -28,7 +28,7 @@ TestBipartito(Grafo G)
 
     if (bipartito) {
         // validamos cantidad de colores
-        assert(G->C == 2);
+            assert(NumeroDeColores(G) == 2);
 
         // si es bipartito, los colores deben ser sí o sí 0/1
         qfor(i, N) {
@@ -36,7 +36,7 @@ TestBipartito(Grafo G)
         }
     } else {
         // caso contrario, debe tener más de 2 colores
-        assert(G->C > 2);
+        assert(NumeroDeColores(G) > 2);
     }
 
     ValidarColoreo(G);
