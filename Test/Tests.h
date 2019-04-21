@@ -17,6 +17,7 @@
 #define MIN_COLOR 0
 #define WHITE 0
 #define BLACK 1
+#endif
 
     // PERFORMANCE CONTROL
 #define roundz(x,d) ((floor(((x)*pow(10,d))+.5))/pow(10,d))
