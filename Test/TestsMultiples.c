@@ -5,6 +5,7 @@
 #include <string.h>
 #include <zconf.h>
 #include <time.h>
+#include <math.h>
 #include "../Wahlaan/Rii.h"
 #include "Tests.h"
 
