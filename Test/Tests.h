@@ -9,13 +9,22 @@
 #define qfor(i,n) for(u32 i=0; i<n; ++i)
 #endif
 
-// PERFORMANCE CONTROL
+// COLORS
+#ifndef COLORS
+#define COLORS
+#define NO_COLOR (u32) 0b11111111111111111111111111111111
+#define MAX_VALUE (u32) 0b11111111111111111111111111111111
+#define MIN_COLOR 0
+#define WHITE 0
+#define BLACK 1
+
+    // PERFORMANCE CONTROL
 #define roundz(x,d) ((floor(((x)*pow(10,d))+.5))/pow(10,d))
 #define SECONDS(X) roundz((((double) clock() - (X)) / CLOCKS_PER_SEC), 2)
 #define MINUTES(X) roundz(SECONDS(X) / (double) 60.0, 2)
 #define TICK(X) clock_t X = clock()
 #define TOCK(X) printf("FIN: Tiempo de ejecución de %s: %g %s.\n\n", (#X), \
-                        MINUTES(X) < 1 ? SECONDS(X): MINUTES(X), \
+                            MINUTES(X) < 1 ? SECONDS(X): MINUTES(X), \
                         MINUTES(X) < 1 ? "sec" : "min")
 #define PARTIAL_TOCK(X, SECTION) printf("PARTIAL: Tiempo de ejecución de %s: %g %s.\n\n", SECTION, \
                         MINUTES(X) < 1 ? SECONDS(X): MINUTES(X), \
