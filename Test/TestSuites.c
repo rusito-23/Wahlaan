@@ -197,7 +197,7 @@ void *ThreadTestOrden(void *vargp) {
 void
 CustomSuite()
 {
-    printTitle("CUSTOM SUITE");
+/*    printTitle("CUSTOM SUITE");
 
     // toma de grafo
     Grafo G = ConstruccionDelGrafo();
@@ -213,4 +213,5 @@ CustomSuite()
     pthread_create(&tid, NULL, ThreadTestOrden, (void *)&G);
 
     pthread_exit(NULL);
+*/
 }
