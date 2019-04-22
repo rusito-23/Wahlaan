@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
+#include <pthread.h>
 
 
 enum Suite
@@ -187,23 +188,16 @@ BipartitoSuite()
 }
 
 
-#define FNUM 3
-
-struct fnc {
-    char (*addr)(Grafo);
-    char name[32];
-};
+void *ThreadTestOrden(void *vargp) {
+    Grafo grafo = *(Grafo *)vargp;
+    TestOrdenWelshPowell(grafo);
+    return NULL;
+}
 
 void
 CustomSuite()
 {
     printTitle("CUSTOM SUITE");
-
-    static struct fnc fnames[FNUM];
-
-    fnames[0] = (struct fnc){RMBCnormal, "TestOrdenRMBCNormal"};
-    fnames[1] = (struct fnc){RMBCrevierte, "TestOrdenRMBCInverso"};
-    fnames[2] = (struct fnc){RMBCchicogrande, "TestOrdenRMBchicogrande"};
 
     // toma de grafo
     Grafo G = ConstruccionDelGrafo();
@@ -212,32 +206,11 @@ CustomSuite()
         _exit(1);
     }
 
-    u32 cantidad = 100;
+    // Testeamos en distintos threads
+    pthread_t tid;
 
-    // seteamos el greedy como valor máximo
-    u32 last_greedy = 0b11111111111111111111111111111111;
+    pthread_create(&tid, NULL, ThreadTestOrden, (void *)&G);
+    pthread_create(&tid, NULL, ThreadTestOrden, (void *)&G);
 
-    u32 error = 0;
-    // repetimos la cantidad de veces pedida
-    qfor(i, cantidad) {
-
-        // para cada uno, elegimos un RMBC distinto
-        struct fnc rmbc = fnames[i%3];
-        rmbc.addr(G);
-
-        // corremos greedy de nuevo para buscar otro coloreo
-        u32 new_greedy = Greedy(G);
-
-        // RMBC nunca debe bajar el coloreo!
-        if (last_greedy < new_greedy) {
-            error++;
-            printf("ERROR: RMBC: %s coloreo anterior: %d -- coloreo actual %d \n",
-                    rmbc.name,
-                    last_greedy,
-                    new_greedy);
-        }
-        last_greedy = new_greedy;
-    }
-
-    printf("Errores: %d \n", error);
+    pthread_exit(NULL);
 }
