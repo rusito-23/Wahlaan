@@ -244,7 +244,7 @@ ValidarColoreo(Grafo G)
 
     // validamos que el coloreo sea propio
     qfor(i, N) {
-        assert(ColorDelVertice(G, i) != NO_COLOR);
+        assert(ColorDelVertice(G, i) != TEST_NO_COLOR);
         qfor(j, GradoDelVertice(G, i)) {
             assert(ColorDelVertice(G, i) != ColorJotaesimoVecino(G, i, j));
         }

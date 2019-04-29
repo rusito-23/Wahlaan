@@ -1,7 +1,6 @@
 #include "../Wahlaan/Rii.h"
 #include "Tests.h"
 #include <stdio.h>
-#include <zconf.h>
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
@@ -37,7 +36,7 @@ ColorSuite()
     Grafo G = ConstruccionDelGrafo();
     if (G == NULL) {
         printf("Ocurrió un error al tomar el grafo! \n\n\n\n");
-        _exit(1);
+        exit(1);
     }
 
     u32 colors;
@@ -76,7 +75,7 @@ SanitySuite()
     Grafo G = ConstruccionDelGrafo();
     if (G == NULL) {
         printf("Ocurrió un error al tomar el grafo! \n\n\n");
-        _exit(1);
+        exit(1);
     }
 
     printGrafo(G);
@@ -169,7 +168,7 @@ BipartitoSuite()
     Grafo G = ConstruccionDelGrafo();
     if (G == NULL) {
         printf("Ocurrió un error al tomar el grafo! \n");
-        _exit(1);
+        exit(1);
     }
 
     u32 colors;
@@ -203,7 +202,7 @@ CustomSuite()
     Grafo G = ConstruccionDelGrafo();
     if (G == NULL) {
         printf("Ocurrió un error al tomar el grafo! \n");
-        _exit(1);
+        exit(1);
     }
 
     // Testeamos en distintos threads
