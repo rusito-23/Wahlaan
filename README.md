@@ -1,66 +1,55 @@
-# Wahlaan Tests 🤓
-Tests para el proyecto de Matemática Discreta II 2019, en Famaf, Argentina.
+# Wahlaan 🤓
 
-## Suites 🙈
-El proyecto cuenta con 4 suites de test, cada uno de los cuales toma un único grafo:
+Discrete Math II 2019 - Famaf, Argentina.
+Uses the Greedy algorithm for Graph Coloring with C.
+
+## Test Suites
 
 - **SANITY**
 	
-	Prueba TODAS las funciones requeridas por el proyecto, validando la funcionalidad **a grandes rasgos** con ayuda de *asserts*, se puede encontrar el código en UnitTests.c
+        Runs several UnitTests over the required functions.
 	
 - **PERFORMANCE**
 
-	Corre los siguientes tests, imprimendo los tiempos parciales de cada uno y un tiempo final que debería ser menor a los 15 minutos:
-	
-	- Toma de grafo
-	- Greedy con orden natural
-	- Reordena con WelshPowell y corre Greedy
+        Runs several actions, saving the partial time for each of one:
+	- Graph reading
+	- Greedy with natural order
+	- WelshPowell Re-Ordering and Greedy
 	- 100 SwitchVertices
-	- 1000 RMBCs, corriendo Greedy luego de cada uno
+	- 1000 RMBCs + Greedy
 
 - **COLOR**
 
-	Muestra los resultados de correr Greedy con los siguientes ordenes, el usuario queda encargado de validar que los resultados se acerquen lo más posible a los requeridos:
+        Shows the results of Greedy with the following orders:
 	
-	- Orden natural
-	- Orden Welsh Powell
+	- Natural
+	- Welsh Powell
 	- 100 SwitchVértices
 	- 100 RMBCs
 
 - **BIPARTITO**
 
-	Muestra los resultados de correr Greedy y Bipartito sobre el grafo.
+        Shows the results of running Greedy and Bipartite over the graph.
 	
 	
 ## Makefile 🔛
-El makefile permite al usuario llamar a los disintos suites con distintas configuraciones y grafos.
-Los target son los siguientes:
 
-- `make <suite> GRAPH=Path/Al/Grafo` toma un único grafo y corre el suite dado (en minúscula). 
+The makefile provides the following targets:
 
-	Ejemplo: `make sanity GRAPH=Graphs/K4.txt`
+- `make <suite> GRAPH=Path/to/Graph` Suite over a Graph
+
+	Example: `make sanity GRAPH=Graphs/K4.txt`
 	
-- `make <suite>-all FOLDER=Path/Al/Folder` toma una carpeta y corre el suite dado en todos los grafos que encuentre dentro. Observaciones: la carpeta no debe estar vacía y no debe contener otras carpetas dentro, o podría producir errores en la ejecución.
+- `make <suite>-all FOLDER=Path/To/Folder` Suite over a folder of Graphs
 
 	Ejemplo: `make performance-all FOLDER=Graphs/Performance`
 	
-- `make <suite>-valgrind GRAPH=Path/Al/Grafo` toma un único grafo y corre la suite dada, ejecutando valgrind con las opciones: **valgrind --tool=memcheck**, si se desea cambiar las opciones con las que se corre valgrind, se debe especificar al llamar make de la siguiente forma:
+- `make <suite>-valgrind GRAPH=Path/To/Graph` Suite over a Graph with Valgrind results:
 	
 	`make bipartito-valgrind GRAPH=Graphs/Bipartito.txt VALGRIND='valgrind --leak-check=full --show-leak-kinds=all'`
 	
-## Ejecutable 💥
-Al correr el comando `make`, se genera un archivo *Ejecutable*, este archivo se puede correr independientemente del make con los siguientes parámetros:
 
-- --suite <SUITE(MAY)>
-- --file <PATH/AL/ARCHIVO>
-
-Este segundo parámetro nos sirve para poder debuggear nuestro código desde un IDE que no soporten la redirección del stdin con `<`.
-	
-## Instalación y seteo de la estructura 🔧
-Para setear los test, lo único que se debe hacer es agregar la carpeta Wahlaan con la especificación requerida por el profe en la carpeta donde se encuentra el Makefile.
-
-### ATENCIÓN
-NO es necesario que la carpeta de Graphs tenga exactamente la misma estructura, ya que el nombre de la carpeta para correr tests en múltiples grafos se toma por el Makefile, esta es simplemente la estructura recomendada:
+### Structure
 
 ```
 .
@@ -82,7 +71,7 @@ NO es necesario que la carpeta de Graphs tenga exactamente la misma estructura, 
 │   ├── TestsMultiples.c
 │   └── UnitTests.c
 ├── Wahlaan
-│   ├── Todos los archivos .c propios del proyecto
+│   ├── Project .c files
 │   └── Rii.h
 └── main.c
 ```
