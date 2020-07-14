@@ -54,14 +54,13 @@ The makefile provides the following targets:
 ```
 .
 ├── Graphs
-│   ├── Bipartito
-│   │   └── Grafos Bipartitos
+│   ├── Bipartite
 │   ├── Color
-│   │   └── Grafos chicos para probar suite COLOR
-│   ├── Completes
-│   │   └── Grafo Completos
+│   │   └── Small graphs to check COLOR suite
+│   ├── Complete
+│   │   └── Complete Graphs
 │   └── Performance
-│       └── Grafos para probar performance
+│       └── Large graphs to test the PERFORMACE suite
 ├── Makefile
 ├── README.md
 ├── Test
